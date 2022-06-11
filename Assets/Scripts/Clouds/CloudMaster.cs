@@ -53,6 +53,11 @@ public class CloudMaster : MonoBehaviour {
     public Color colA;
     public Color colB;
 
+    [Header("My Edit Fiels")]
+    public Vector3 earthCenter;
+    public float earthRadius;
+    public float atmosphereRadius;
+
     // Internal
     [HideInInspector]
     public Material material;
@@ -64,6 +69,12 @@ public class CloudMaster : MonoBehaviour {
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(earthCenter, earthRadius);
+        Gizmos.DrawWireSphere(earthCenter, atmosphereRadius);
+
+    }
     [ImageEffectOpaque]
     private void OnRenderImage (RenderTexture src, RenderTexture dest) {
 
@@ -92,6 +103,12 @@ public class CloudMaster : MonoBehaviour {
         int width = Mathf.CeilToInt (size.x);
         int height = Mathf.CeilToInt (size.y);
         int depth = Mathf.CeilToInt (size.z);
+
+        // edit fields
+        material.SetVector("earthCenter", earthCenter);
+        material.SetFloat("earthRadius", earthRadius);
+        material.SetFloat("atmosphereRadius", atmosphereRadius);
+        // edit fields end
 
         material.SetFloat ("scale", cloudScale);
         material.SetFloat ("densityMultiplier", densityMultiplier);

@@ -38,6 +38,8 @@ Shader "Hidden/Clouds"
                 v2f output;
                 output.pos = UnityObjectToClipPos(v.vertex);
                 output.uv = v.uv;
+
+
                 // Camera space matches OpenGL convention where cam forward is -z. In unity forward is positive z.
                 // (https://docs.unity3d.com/ScriptReference/Camera-cameraToWorldMatrix.html)
                 float3 viewVector = mul(unity_CameraInvProjection, float4(v.uv * 2 - 1, 0, -1));
@@ -103,6 +105,14 @@ Shader "Hidden/Clouds"
             float debugTileAmount;
             float viewerSize;
             
+            // uniforms
+            float3 earthCenter;
+            float earthRadius;
+            float atmosphereRadius;
+
+
+            float3 gRayDir;
+
             float remap(float v, float minOld, float maxOld, float minNew, float maxNew) {
                 return minNew + (v-minOld) * (maxNew - minNew) / (maxOld-minOld);
             }
@@ -117,6 +127,9 @@ Shader "Hidden/Clouds"
                 return float2 (x/scale, y/scale);
             }
 
+            float centerDist(float3 p, float3 center) {
+                return distance(p, center);
+            }
             // Returns (dstToBox, dstInsideBox). If ray misses box, dstInsideBox will be zero
             float2 rayBoxDst(float3 boundsMin, float3 boundsMax, float3 rayOrigin, float3 invRaydir) {
                 // Adapted from: http://jcgt.org/published/0007/03/04/
@@ -162,7 +175,27 @@ Shader "Hidden/Clouds"
                 return (v-low)/(high-low);
             }
 
-            float sampleDensity(float3 rayPos) {
+
+
+            float3 RotateAroundZInDegrees(float3 vertex, float degrees)
+            {
+                float alpha = degrees * UNITY_PI / 180.0;
+                float sina, cosa;
+                sincos(alpha, sina, cosa);
+                float2x2 m = float2x2(cosa, -sina, sina, cosa);
+                //return float3(mul(m, vertex.xz), vertex.y).xzy;
+                return float3(mul(m, vertex.xy), vertex.z).zxy;
+            }
+
+            inline float angleBetween(float3 colour, float3 original) {
+                return acos(dot(colour, original));
+            }
+
+            float sampleDensity(float3 rayPos, float3 rayDir) {
+
+                float3 viewForward = unity_CameraToWorld._m02_m12_m22;
+
+
                 // Constants:
                 const int mipLevel = 0;
                 const float baseScale = 1/1000.0;
@@ -173,6 +206,15 @@ Shader "Hidden/Clouds"
                 float3 size = boundsMax - boundsMin;
                 float3 boundsCentre = (boundsMin+boundsMax) * .5;
                 float3 uvw = (size * .5 + rayPos) * baseScale * scale;
+
+                // try to rotate uvw positions??
+                float angle = angleBetween(viewForward, rayDir);
+                //float angle = angleBetween(float3(0.0, 1.0f, 0.0f), float3(rayDir.x, rayDir.y, 0.0f));
+                //uvw = RotateAroundZInDegrees(uvw, degrees(angle));
+
+               /* if (uvw.x > 0.99f && uvw.x < 1.01f) {
+                    uvw = 0;
+                }*/
                 float3 shapeSamplePos = uvw + shapeOffset * offsetSpeed + float3(time,time*0.1,time*0.2) * baseSpeed;
 
                 // Calculate falloff at along x/z edges of the cloud container
@@ -198,6 +240,18 @@ Shader "Hidden/Clouds"
 
                 // Save sampling from detail tex if shape density <= 0
                 if (baseShapeDensity > 0) {
+
+                    float ydiff = rayPos.y - _WorldSpaceCameraPos.y;
+
+                    float startPos = 550;
+                    ydiff = ydiff / startPos;
+                    ydiff *= ydiff;
+                    ydiff = clamp(ydiff, 0.0f, 1.0f);
+
+                    //float angle = angleBetween(viewForward, rayDir);
+                    //float range01 = angle / (2.0f * UNITY_PI);
+                    baseShapeDensity *= ydiff;
+
                     // Sample detail noise
                     float3 detailSamplePos = uvw*detailNoiseScale + detailOffset * offsetSpeed + float3(time*.4,-time,time*0.1)*detailSpeed;
                     float4 detailNoise = DetailNoiseTex.SampleLevel(samplerDetailNoiseTex, detailSamplePos, mipLevel);
@@ -224,7 +278,7 @@ Shader "Hidden/Clouds"
 
                 for (int step = 0; step < numStepsLight; step ++) {
                     position += dirToLight * stepSize;
-                    totalDensity += max(0, sampleDensity(position) * stepSize);
+                    totalDensity += max(0, sampleDensity(position, gRayDir) * stepSize);
                 }
 
                 float transmittance = exp(-totalDensity * lightAbsorptionTowardSun);
@@ -282,6 +336,18 @@ Shader "Hidden/Clouds"
                 float viewLength = length(i.viewVector);
                 float3 rayDir = i.viewVector / viewLength;
                 
+                gRayDir = rayDir;
+                float atmoOffset = 500;
+
+                float earthDist = distance(i.viewVector, earthCenter);
+
+                float diff = earthDist - earthRadius;
+                if (earthDist < earthRadius || earthDist > atmosphereRadius)
+                {
+                    float3 backgroundCol = tex2D(_MainTex, i.uv);
+                    //return float4(backgroundCol, 0.5f);
+                }
+
                 // Depth and cloud container intersection info:
                 float nonlin_depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv);
                 float depth = LinearEyeDepth(nonlin_depth) * viewLength;
@@ -290,7 +356,10 @@ Shader "Hidden/Clouds"
                 float dstInsideBox = rayToContainerInfo.y;
 
                 // point of intersection with the cloud container
+
+                //earthRadius + viewLength
                 float3 entryPoint = rayPos + rayDir * dstToBox;
+                //float3 entryPoint = rayPos + rayDir * (viewLength);
 
                 // random starting offset (makes low-res results noisy rather than jagged/glitchy, which is nicer)
                 float randomOffset = BlueNoise.SampleLevel(samplerBlueNoise, squareUV(i.uv*3), 0);
@@ -313,9 +382,12 @@ Shader "Hidden/Clouds"
 
                 while (dstTravelled < dstLimit) {
                     rayPos = entryPoint + rayDir * dstTravelled;
-                    float density = sampleDensity(rayPos);
+                    float density = sampleDensity(rayPos, gRayDir);
                     
                     if (density > 0) {
+                       /* if (diff < 0.1f) {
+                            density *= 0.1 * (1 - diff * 2.0f);
+                        }*/
                         float lightTransmittance = lightmarch(rayPos);
                         lightEnergy += density * stepSize * transmittance * lightTransmittance * phaseVal;
                         transmittance *= exp(-density * stepSize * lightAbsorptionThroughCloud);

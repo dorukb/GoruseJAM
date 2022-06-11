@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1787afcfc474f492cb336a2bb25127ac, type: 3}
   m_Name: Detail_2
   m_EditorClassIdentifier: 
-  seed: 1
-  numDivisionsA: 13
-  numDivisionsB: 24
-  numDivisionsC: 28
+  seed: 45
+  numDivisionsA: 5
+  numDivisionsB: 1
+  numDivisionsC: 1
   persistence: 0.5
   tile: 1
   invert: 1
