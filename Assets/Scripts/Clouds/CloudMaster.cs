@@ -62,11 +62,36 @@ public class CloudMaster : MonoBehaviour {
     [HideInInspector]
     public Material material;
 
+    private float orgDensityOffset;
+    public float orgAbsorption;
+    public float orgTimeScale;
+
     void Awake () {
         var weatherMapGen = FindObjectOfType<WeatherMap> ();
         if (Application.isPlaying) {
             weatherMapGen.UpdateMap ();
         }
+
+        orgDensityOffset = densityOffset;
+        orgAbsorption = lightAbsorptionThroughCloud;
+        orgTimeScale = timeScale;
+    }
+
+    private void OnDestroy()
+    {
+        material.SetFloat("densityOffset", orgDensityOffset);
+        material.SetFloat("lightAbsorptionThroughCloud", orgAbsorption);
+    }
+    public void SetWeatherParams(float densityOffset, float absorption, float timeScale)
+    {
+        this.densityOffset = densityOffset;
+        this.lightAbsorptionThroughCloud = absorption;
+        this.timeScale = timeScale;
+
+        material.SetFloat("densityOffset", orgDensityOffset);
+        material.SetFloat("lightAbsorptionThroughCloud", orgAbsorption);
+
+        Debug.Log("set weather params: " + this.densityOffset + "  abs: " + lightAbsorptionThroughCloud);
     }
 
     private void OnDrawGizmos()
