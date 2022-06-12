@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
 {
-    [SerializeField] Transform playerCamera = null;
+    public Transform playerCamera = null;
 
     [Header("Camera Movement")]
     //[SerializeField] float mouseSensitivity = 3f;
