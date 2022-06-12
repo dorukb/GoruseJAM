@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Transform playerCamera = null;
 
     [Header("Camera Movement")]
-    [SerializeField] float mouseSensitivity = 3f;
+    //[SerializeField] float mouseSensitivity = 3f;
     [SerializeField] bool lockCursor = true;
 
     [Tooltip(("Set to true for smoothed camera movement, to false for more snappy & responsive but unrealistic movement."))]
@@ -81,7 +81,7 @@ public class Movement : MonoBehaviour
         playerCamera.localEulerAngles = Vector3.right * _cameraPitch;
 
         // Turn the player left & right based on horizontal mouse movement.
-        transform.Rotate(Vector3.up * mouseDelta.x * mouseSensitivity);
+        transform.Rotate(Vector3.up * mouseDelta.x * GameSettings.mouseSensitivity);
     }
 
     void UpdateMovement()
