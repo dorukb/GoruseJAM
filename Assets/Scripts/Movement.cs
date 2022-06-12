@@ -41,8 +41,13 @@ public class Movement : MonoBehaviour
     Vector2 _currentMouseDelta = Vector2.zero;
     Vector2 _currentMouseDeltaVelocity = Vector2.zero;
 
+    public AudioClip[] dirtSounds;
+    public AudioClip[] stoneSounds;
+    public AudioSource footstepsSource;
 
     bool canMove = true;
+
+    public bool playStoneSounds = false;
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -120,6 +125,26 @@ public class Movement : MonoBehaviour
 
             // use the smoothed dir
             moveInput = _currentDir;
+
+            if(moveInput.sqrMagnitude > 0.1f)
+            {
+                if(!footstepsSource.isPlaying)
+                {
+                    // get new random sfx and play it
+                    if (playStoneSounds)
+                    {
+                        footstepsSource.Stop();
+                        footstepsSource.clip = stoneSounds[Random.Range(0, stoneSounds.Length)];
+                        footstepsSource.Play();
+                    }
+                    else
+                    {
+                        footstepsSource.Stop();
+                        footstepsSource.clip = dirtSounds[Random.Range(0, dirtSounds.Length)];
+                        footstepsSource.Play();
+                    }
+                }
+            }
         }
 
         // custom falling down, gravity effect.

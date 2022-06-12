@@ -17,6 +17,8 @@ public class StoryTrigger : MonoBehaviour
         {
             TriggerDialogue();
         }
+
+        Destroy(gameObject);
     }
     public void TriggerDialogue()
     {
