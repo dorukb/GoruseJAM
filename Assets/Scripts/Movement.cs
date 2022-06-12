@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float downwardsMaxTiltAngle = 80f;
 
     [Header("Player Movement")]
-    [SerializeField] float moveSpeed = 6f;
+    [SerializeField] public float moveSpeed = 6f;
     [SerializeField] float gravity = -13f;
 
     [Tooltip(("Set to true for smoothed movement, to false for more snappy & responsive but unrealistic movement."))]

@@ -61,6 +61,7 @@ public class DialogueManager : MonoBehaviour
         float audioDur = 0f;
         if(line.clip == null)
         {
+            audioDur = 0.75f;
             dialogueSource.Stop();
         }
         else

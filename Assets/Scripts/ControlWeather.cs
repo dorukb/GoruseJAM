@@ -16,6 +16,9 @@ public class ControlWeather : MonoBehaviour
     public float transitionDuration = 2f;
 
     bool isInTransition = false;
+
+
+    public bool isOvercast = false;
     private void Awake()
     {
         cloudController = FindObjectOfType<CloudMaster>();
@@ -34,18 +37,33 @@ public class ControlWeather : MonoBehaviour
             TransitionToClearSky(transitionDuration);
         }
     }
+
+    public void ToggleWeather(float duration)
+    {
+        if (isOvercast)
+        {
+            TransitionToClearSky(duration);
+        }
+        else
+        {
+            TransitionToOvercast(duration);
+        }
+    }
     public void TransitionToOvercast(float duration)
     {
-        if (!isInTransition)
+        if (!isInTransition && !isOvercast)
         {
+            StopAllCoroutines();
+
             StartCoroutine(OvercastTransition(duration));
         }
     }
 
     public void TransitionToClearSky(float duration)
     {
-        if (!isInTransition)
+        if (!isInTransition && isOvercast)
         {
+            StopAllCoroutines();
             StartCoroutine(ClearSkyTransition(duration));
         }
     }
@@ -67,6 +85,7 @@ public class ControlWeather : MonoBehaviour
         }
         cloudController.SetWeatherParams(overcastDensityOffset, overcastAbsorption, overcastTimeScale);
         isInTransition = false;
+        isOvercast = true;
 
     }
     public IEnumerator ClearSkyTransition(float duration)
@@ -86,5 +105,6 @@ public class ControlWeather : MonoBehaviour
         }
         cloudController.SetWeatherParams(clearDensityOffset, clearAbsorption, clearTimeScale);
         isInTransition = false;
+        isOvercast = false;
     }
 }

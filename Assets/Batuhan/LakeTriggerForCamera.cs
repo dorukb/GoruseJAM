@@ -13,14 +13,14 @@ public class LakeTriggerForCamera : MonoBehaviour
     private Transform camera;
     private void OnTriggerEnter(Collider other)
     {
-        var p = other.GetComponent<Movement>();
-        if (p)
-        {
-            p.DisablePlayerMovement();
-            camera = p.playerCamera;
-            camPos = camera.position;
-            StartCoroutine(CamRoutine());
-        }
+        //var p = other.GetComponent<Movement>();
+        //if (p)
+        //{
+        //    p.DisablePlayerMovement();
+        //    camera = p.playerCamera;
+        //    camPos = camera.position;
+        //    StartCoroutine(CamRoutine());
+        //}
     }
 
     private IEnumerator CamRoutine()
