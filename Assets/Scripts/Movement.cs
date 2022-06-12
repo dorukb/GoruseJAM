@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
     bool canMove = true;
 
     public bool playStoneSounds = false;
-    void Start()
+    void Awake()
     {
         _controller = GetComponent<CharacterController>();
         // Lock mouse cursor to middle and make it invisible

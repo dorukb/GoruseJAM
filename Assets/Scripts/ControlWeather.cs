@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class ControlWeather : MonoBehaviour
 {
@@ -56,6 +58,7 @@ public class ControlWeather : MonoBehaviour
             StopAllCoroutines();
 
             StartCoroutine(OvercastTransition(duration));
+            FindObjectOfType<Light>().DOIntensity(.5f, duration);
         }
     }
 
@@ -65,6 +68,7 @@ public class ControlWeather : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(ClearSkyTransition(duration));
+            FindObjectOfType<Light>().DOIntensity(1f, duration);
         }
     }
 
