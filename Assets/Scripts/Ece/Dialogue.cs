@@ -1,9 +1,11 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Dialogue 
+[CreateAssetMenu(fileName = "newDialog", menuName = "Dialog")]
+public class Dialogue : ScriptableObject
 {
     public Line[] lines;
+    public bool isLast = false;
     
     [System.Serializable]
     public class Line

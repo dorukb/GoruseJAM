@@ -19,6 +19,8 @@ public class DialogueManager : MonoBehaviour
 
     private Movement player;
 
+    private Dialogue currDialog;
+
     void Start()
     {
         dialogParent.SetActive(false);
@@ -30,7 +32,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue (Dialogue dialogue)
     {
         //player.DisablePlayerMovement();
-
+        currDialog = dialogue;
         dialogParent.SetActive(true);
         sentences.Clear();
 
@@ -99,6 +101,17 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         dialogParent.SetActive(false);
+
+        if (currDialog.isLast)
+        {
+            FindObjectOfType<GameOverController>().OnGameOver();
+            // game over!
+            // player enable "space" input
+            // show "Space to Scream" on UI
+            Debug.Log("game over");
+        }
+
+        currDialog = null;
         //player.EnablePlayerMovement();
     }
 }

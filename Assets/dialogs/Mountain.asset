@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c954f74d87b0a43a7fa0e9a3ea5feb, type: 3}
+  m_Name: Mountain
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: 'That father who gained immortality, he never wanted that. A life without
+      his son. That summit of mine is the closest point to the Olympus. And his son
+      was unable to speak. Father begged the gods for his son to speak again. However,
+      something unfortunate happened that day and his son died. '
+    speaker: Mountain
+    clip: {fileID: 8300000, guid: f70fc6f27ab370e4885b92632c0bc66b, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  - sentence: 'All gods wanted to hear a scream like that father gave that day. They
+      wanted him to scream once more. They promised if he screams again they will
+      take his immortality and end his meaningless miserable life. '
+    speaker: Mountain
+    clip: {fileID: 8300000, guid: fc466902f9531a442b20c05670383abd, type: 3}
+  - sentence: Father did not accept that and he take an oath and became silent like
+      his son. Gods offered immortality to anyone who can scream louder than him.
+      But no one succeeded. And they vanished.
+    speaker: Mountain
+    clip: {fileID: 8300000, guid: 97a517870c0d2e84295db3e09ef935d4, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  - sentence: Tell me old man what is your purpose?
+    speaker: Mountain
+    clip: {fileID: 8300000, guid: 07eea527924dd13448357ea4c90fdccb, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  - sentence: 'What do you want, who are you? '
+    speaker: Mountain
+    clip: {fileID: 8300000, guid: 29e3f70847ac0ad4cb286e6b1a04332f, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  - sentence: 'Wait I remember you. '
+    speaker: Mountain
+    clip: {fileID: 8300000, guid: 91b9abbd22431074cad6f70b8e859100, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  isLast: 0

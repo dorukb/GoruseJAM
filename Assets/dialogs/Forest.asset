@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c954f74d87b0a43a7fa0e9a3ea5feb, type: 3}
+  m_Name: Forest
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Where are you headed, traveler?
+    speaker: Forest
+    clip: {fileID: 8300000, guid: bd80a6b2598b61d40a14f7988670a0c2, type: 3}
+  - sentence: ...
+    speaker: Traveller
+    clip: {fileID: 0}
+  - sentence: "I am the voice of the forest. It\u2019s not the first time you heard
+      a forest speaking right? "
+    speaker: Forest
+    clip: {fileID: 8300000, guid: f6339fa9c88ad7f4a9e37b36a693c049, type: 3}
+  - sentence: ...
+    speaker: Traveller
+    clip: {fileID: 0}
+  - sentence: "Why don\u2019t you answer?"
+    speaker: Forest
+    clip: {fileID: 8300000, guid: 4fa45441657db574d8633d520a220959, type: 3}
+  - sentence: ...
+    speaker: Traveller
+    clip: {fileID: 0}
+  - sentence: You can speak, there is no reason to do that.
+    speaker: Forest
+    clip: {fileID: 8300000, guid: c416828cdc82a91429b7a4a0de58581a, type: 3}
+  - sentence: ...
+    speaker: Traveller
+    clip: {fileID: 0}
+  - sentence: Just speak, get it off your chest! It is so easy.  Do it!
+    speaker: Forest
+    clip: {fileID: 8300000, guid: 5e7af4904410293438fbf072f06bf1ba, type: 3}
+  - sentence: (I have an oath. I cannot speak.)
+    speaker: Traveller
+    clip: {fileID: 0}
+  - sentence: Ohhh I see you are trying to climb that mountain.
+    speaker: Forest
+    clip: {fileID: 8300000, guid: 0d93e859a01d09646a81faadfce04cca, type: 3}
+  - sentence: ...
+    speaker: Traveller
+    clip: {fileID: 0}
+  - sentence: Do you know the story of the first man that climbed that mountain?
+    speaker: Forest
+    clip: {fileID: 8300000, guid: ab425d9e808096e47a9a87c5adef0a8e, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  - sentence: 'Something bad, reaaally bad happened on that mountain. I saw a father
+      and his son climbing there. I have only heard the voice of the father. A son
+      that can not speak. '
+    speaker: Forest
+    clip: {fileID: 8300000, guid: 79eab7357d9c7564f8ca2f36b6853490, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  - sentence: "I don\u2019t know what exactly happened at the top of that mountain.
+      But something bad has happened. I have heard the loudest scream that a creature
+      can make. Father came back from the mountain alone. "
+    speaker: Forest
+    clip: {fileID: 8300000, guid: a6004f52a5ccb0745a874f03cb79b33e, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  - sentence: "That\u2019s the mountain of the gods, old man. Be careful."
+    speaker: Forest
+    clip: {fileID: 8300000, guid: 048e885e491d40f4b872f3009ae80a7f, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 0}
+  - sentence: "I will clear your way but be vigilant old man. I have seen so many
+      people walking the path you are taking but I haven\u2019t seen much coming
+      back. "
+    speaker: Forest
+    clip: {fileID: 8300000, guid: 960b00a9c8b6f0542a17edc7fc6b70bd, type: 3}
+  isLast: 0

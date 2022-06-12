@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c954f74d87b0a43a7fa0e9a3ea5feb, type: 3}
+  m_Name: Lake
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: You are getting closed to the mountain.
+    speaker: Lake
+    clip: {fileID: 8300000, guid: a3dec2ecd02c41c40b1567d5809d0382, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 8300000, guid: 8c0417657e412674eb2ce6745c72c615, type: 3}
+  - sentence: You can speak to me. I am the spirit of the water.
+    speaker: Lake
+    clip: {fileID: 8300000, guid: 89aebcbca15baca44acff89c437b962d, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 8300000, guid: a456ee59f84ac5b479e37be572d8b58b, type: 3}
+  - sentence: Just speak old man or scream as loud as you can.
+    speaker: Lake
+    clip: {fileID: 8300000, guid: 922cf49c6ae40df4db0aa20af09fbf0b, type: 3}
+  - sentence: (I can not speak I am too close)
+    speaker: Traveler
+    clip: {fileID: 8300000, guid: 295734457d0a3524695745bd220cfd85, type: 3}
+  - sentence: "So you are saving that scream\u2026"
+    speaker: Lake
+    clip: {fileID: 8300000, guid: 6617028fee5ae7447881e508244c74dd, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 8300000, guid: d65d2d8d75730444584a3b25075360a7, type: 3}
+  - sentence: 'Years ago, when a father lost his son: He screamed so loud even gods
+      heard it from Olympos and they cried. '
+    speaker: Lake
+    clip: {fileID: 8300000, guid: 1f540c1a20a5f5646a572ff95ce19825, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 8300000, guid: 67f9c8a485a14bc438eb5975bb4402b4, type: 3}
+  - sentence: 'In order to honor that father, gods gave powers to that mortal. They
+      made him immortal. And whoever climbed that mountain and screamed louder than
+      him will be immortal. '
+    speaker: Lake
+    clip: {fileID: 8300000, guid: 6be764762729d9c489721b753d63b1ba, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 8300000, guid: 246a8b02051ccfc439cd993eb40515bb, type: 3}
+  - sentence: I have seen so many travelers going there to do that but no one returned.
+      Be wary old man.
+    speaker: Lake
+    clip: {fileID: 8300000, guid: 1af45af3db947d4479f6486e29cbf817, type: 3}
+  - sentence: ...
+    speaker: Traveler
+    clip: {fileID: 8300000, guid: d06a6574ca243a24e8e4356dec3916bd, type: 3}
+  isLast: 0
