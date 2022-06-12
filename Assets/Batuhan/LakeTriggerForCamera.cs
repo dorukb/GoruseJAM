@@ -26,6 +26,7 @@ public class LakeTriggerForCamera : MonoBehaviour
     private IEnumerator CamRoutine()
     {
         camera.DOMove(endCamRot, .2f);
+        
         yield break;
     }
 }
